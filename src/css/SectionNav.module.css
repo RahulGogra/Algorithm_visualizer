@@ -1,0 +1,20 @@
+.navContainer {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    border-bottom: 2px solid #ffffff;
+}
+
+.navLinks {
+    display: flex;
+    gap: 15px;
+}
+
+.navLinks a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.navLinks a:hover {
+    text-decoration: underline;
+}

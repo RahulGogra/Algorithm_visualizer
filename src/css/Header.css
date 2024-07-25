@@ -1,0 +1,33 @@
+/* Header.css */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 2px solid #e9ecef; /* Optional border for separation */
+}
+
+.home-button-container {
+    flex: 0 0 auto; /* Ensure it doesn't grow or shrink */
+}
+
+.home-button {
+    padding: 10px 20px;
+    background-color: #2ea8dc;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.home-button:hover {
+    background-color: #237da3;
+}
+
+.header h1 {
+    flex: 1; /* Allow the heading to take up remaining space */
+    text-align: center; /* Center the text */
+    margin: 0; /* Remove default margin */
+    color: #e6ebf0; /* Dark text color */
+}

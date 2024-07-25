@@ -1,0 +1,73 @@
+body {
+    text-align: center;
+}
+
+h1 {
+    color: white;
+    font-size: 48px;
+}
+
+.Algorithms {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.Algorithms p {
+    font-size: 1.2em;
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+.Algo_button {
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    transition: transform 0.3s, background-color 0.3s;
+    cursor: pointer;
+}
+
+.Algo_button img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+.Algo_button span {
+    font-size: 18px;
+    color: #007bff;
+}
+
+.Algo_button:hover {
+    transform: scale(1.05);
+    background-color: #f0f0f0;
+}
+
+.Algo_list {
+    text-align: center;
+}
+
+.Algo_list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.Algo_list li {
+    margin: 10px 0;
+}
+
+.Algo_list a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.Algo_list a:hover {
+    text-decoration: underline;
+}

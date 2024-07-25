@@ -1,0 +1,87 @@
+.linearSearchContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    text-align: center;
+    margin: 20px;
+}
+
+.arrayContainer {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.arrayBar {
+    background-color: #007bff;
+    margin: 0 2px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+    color: white;
+    font-size: 12px;
+    padding: 2px;
+    box-sizing: border-box;
+}
+
+.arrayBar.swapping {
+    background-color: #ff6347; /* Color when element is being checked */
+}
+
+.stepsContainer {
+    width: 300px;
+    height: 500px;
+    margin-left: 20px;
+    text-align: left;
+    max-width: 300px;
+    background-color: #313131;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    max-height: 500px;
+}
+
+.stepsContainer h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.stepsContainer ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.stepsContainer li {
+    margin: 5px 0;
+    font-size: 1em;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+input[type="number"] {
+    padding: 5px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 200px;
+}

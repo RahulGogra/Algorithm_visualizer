@@ -1,0 +1,176 @@
+/* Styles for Grid Component */
+/* dijkstra.css */
+/* dijkstra.css */
+
+.theory-section {
+    text-align: center;
+    margin: 20px;
+}
+
+.instructions,
+.steps {
+    width: 20%;
+    margin: 10px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.instructions h3,
+.steps h3 {
+    margin-top: 0;
+}
+
+.instructions p,
+.steps p {
+    margin: 5px 0;
+}
+
+.instructions ul {
+    padding-left: 20px;
+}
+.Details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+}
+
+.Details > div {
+    margin: 10px 0;
+}
+
+.Details p {
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: left;
+}
+
+.Details button,
+.Details select-wrapper {
+    margin: 5px;
+    padding: 10px 15px;
+    border: 1px solid #888;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: #333;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.Details button:disabled {
+    background-color: #e0e0e0;
+    color: #aaa;
+    cursor: not-allowed;
+}
+
+.Details button:hover:not(:disabled) {
+    border-color: #666;
+    background-color: #f1f1f1;
+}
+
+/* Custom select wrapper */
+.select-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 160px; /* Adjust as needed */
+    margin: 5px;
+}
+
+.select-wrapper select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #888;
+    border-radius: 5px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.select-wrapper select:disabled {
+    background-color: #e0e0e0;
+    color: #aaa;
+    cursor: not-allowed;
+}
+
+/* Dropdown arrow styling */
+.select-wrapper::after {
+    content: "▼";
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 12px;
+    color: #333;
+}
+
+.grid-box {
+    display: flex;
+    justify-content: center;
+}
+/* Grid Container */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(20, 1fr); /* 10 columns */
+    border: 1px solid #ccc; /* Border around the grid */
+    width: 100%; /* Full width */
+    max-width: 800px; /* Max width for responsiveness */
+    padding: 10px; /* Padding around the grid */
+}
+
+/* Grid Cell */
+.grid-cell {
+    height: 30px; /* Cell height */
+    line-height: 30px; /* Vertical centering */
+    text-align: center;
+    background-color: #1f1f1f;
+    color: rgb(255, 255, 255);
+    border: 1px solid #000000;
+    cursor: pointer;
+}
+
+/* Hover effect */
+.grid-cell:hover {
+    background-color: #393838;
+}
+
+.visited {
+    background-color: lightblue;
+}
+
+.path {
+    background-color: yellow;
+}
+.start {
+    background-color: greenyellow;
+}
+.start:hover {
+    background-color: rgb(141, 212, 34);
+}
+
+.end {
+    background-color: red;
+}
+
+.end:hover {
+    background-color: rgb(190, 0, 0);
+}
+
+.wall {
+    background-color: #6c00ca;
+}
+.wall:hover {
+    background-color: #530291;
+}
+.weight {
+    background-color: #1f1f1f;
+    background-image: url("../../public/weight.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
