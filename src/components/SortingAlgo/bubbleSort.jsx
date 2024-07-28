@@ -6,18 +6,16 @@ import SectionNav from "../sectionNav";
 const BubbleSort = () => {
     const [array, setArray] = useState([]);
     const [isSorting, setIsSorting] = useState(false);
-    const [round, setRound] = useState(0);
     const [swappingIndices, setSwappingIndices] = useState([-1, -1]); // New state to keep track of swapping indices
     const [currentStep, setCurrentStep] = useState("");
 
     const generateArray = useCallback(() => {
         if (isSorting) return; // Prevent changes during sorting
         const newArray = Array.from(
-            { length: 50 },
+            { length: 30 },
             () => Math.floor(Math.random() * 400) + 10
         );
         setArray(newArray);
-        setRound(0);
         setCurrentStep("");
     }, [isSorting, setArray]);
 
@@ -41,7 +39,6 @@ const BubbleSort = () => {
                     await new Promise((resolve) => setTimeout(resolve, 90)); // Delay for visualization
                 }
             }
-            setRound((prevRound) => prevRound + 1); // Increment the round after each iteration
             await new Promise((resolve) => setTimeout(resolve, 500)); // Add an interval after one round is complete
         }
         setCurrentStep("Sorting complete!");
@@ -104,7 +101,6 @@ const BubbleSort = () => {
                         </ul>
                     </div>
                 </div>
-                <p>Round: {round}</p>
             </div>
         </>
     );

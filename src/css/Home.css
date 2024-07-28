@@ -21,6 +21,7 @@ h1 {
 
 .Algo_button {
     min-width: 200px;
+    min-height: 200px; /* Added minimum height for better layout */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,11 +32,13 @@ h1 {
     border-radius: 10px;
     transition: transform 0.3s, background-color 0.3s;
     cursor: pointer;
+    position: relative; /* Added for positioning the links */
+    overflow: hidden; /* Ensure child elements do not overflow */
 }
 
 .Algo_button img {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     margin-bottom: 10px;
 }
 
@@ -46,16 +49,40 @@ h1 {
 
 .Algo_button:hover {
     transform: scale(1.05);
-    background-color: #f0f0f0;
+    background-color: #383838;
 }
 
-.Algo_list {
+/* New styles for displaying the links on hover */
+.Algo_button .Algo_list {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #383838;
+    box-sizing: border-box;
+    z-index: 1;
+    border-radius: 10px; /* Ensures border radius is consistent */
+    justify-content: center;
+    align-items: center;
     text-align: center;
 }
 
+.Algo_button:hover .Algo_list {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Ensures proper styling of list items */
 .Algo_list ul {
     list-style: none;
     padding: 0;
+    margin: 0;
+}
+.Algo_list h2 {
+    padding: 0;
+    margin: 0;
 }
 
 .Algo_list li {

@@ -1,0 +1,63 @@
+.container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+.Buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Buttons div {
+    margin-right: 20px;
+    display: flex;
+}
+.divbutton {
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.button {
+    margin: 10px 0;
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #45a049;
+}
+
+.input {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.label {
+    margin: 10px 0;
+    display: block;
+    font-weight: bold;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+}
+
+.shortestPath {
+    width: 300px;
+    margin-top: 20px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.svgContainer svg {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
