@@ -14,7 +14,7 @@ import BellmanFord from "./components/GreedyAlgo/bellmanFord";
 
 import Dfs from "./components/Graph/DFS";
 import Bfs from "./components/Graph/BFS";
-import BinaryTree from "./components/binaryTree/binarytree";
+import BinaryTree from "./components/Graph/binarytree";
 
 import Linklist from "./components/LinearDS/linklist";
 import Array from "./components/LinearDS/array";
@@ -37,7 +37,7 @@ function App() {
                 <Route path="/sorting/insertion" element={<InsertionSort />} />
                 <Route path="/graph/bfs" element={<Bfs />} />
                 <Route path="/graph/dfs" element={<Dfs />} />
-                <Route path="/binaryTree" element={<BinaryTree />} />
+                <Route path="/graph/binaryTree" element={<BinaryTree />} />
                 <Route path="/array" element={<Array />} />
                 <Route path="/stack" element={<Stack />} />
                 <Route path="/queue" element={<Queue />} />

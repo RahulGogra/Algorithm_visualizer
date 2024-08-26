@@ -33,7 +33,7 @@ const SectionNav = () => {
         } else if (path.startsWith("/graph")) {
             return (
                 <div className={styles.navLinks}>
-                    <Link to="/binaryTree">Binary Tree</Link>
+                    <Link to="/graph/binaryTree">Binary Tree</Link>
                     <Link to="/graph/bfs">Breadth First Search</Link>
                     <Link to="/graph/dfs">Depth First Search</Link>
                 </div>

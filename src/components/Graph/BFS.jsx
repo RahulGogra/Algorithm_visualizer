@@ -9,17 +9,15 @@ function Bfs() {
     const [nodeNumber, setNodeNumber] = useState("");
     const [targetNodeName, setTargetNodeName] = useState("");
     const [foundNode, setFoundNode] = useState(null);
-    const [visitedNodes, setVisitedNodes] = useState([]); // State to keep track of visited nodes
-    const [visitedLinks, setVisitedLinks] = useState([]);
+    const [visitedNodes, setVisitedNodes] = useState([]);
+    const [visitedLinks] = useState([]);
 
-    // Effect to draw the tree when data changes
     useEffect(() => {
         if (!treeData) return;
 
         const width = 700;
         const height = 700;
 
-        // Clear previous SVG content before re-rendering
         d3.select(svgRef.current).selectAll("*").remove();
 
         const svg = d3
@@ -33,7 +31,6 @@ function Bfs() {
         const rootNode = d3.hierarchy(treeData);
         treeLayout(rootNode);
 
-        // Draw links
         svg.selectAll(".link")
             .data(rootNode.links())
             .enter()
@@ -50,11 +47,10 @@ function Bfs() {
                     .x((d) => d.x)
             )
             .attr("fill", (d) => {
-                if (visitedLinks.includes(d.data.name)) return "red";
-                return;
+                if (visitedLinks.includes(d.name)) return "red";
+                return "none";
             });
 
-        // Draw nodes
         const nodes = svg
             .selectAll(".node")
             .data(rootNode.descendants())
@@ -67,8 +63,8 @@ function Bfs() {
             .append("circle")
             .attr("r", 8)
             .attr("fill", (d) => {
-                if (foundNode && d.data.name === foundNode) return "orange"; // Highlight found node
-                if (visitedNodes.includes(d.data.name)) return "red"; // Highlight visited nodes
+                if (foundNode && d.data.name === foundNode) return "orange";
+                if (visitedNodes.includes(d.data.name)) return "red";
                 return "blue";
             });
 
@@ -79,12 +75,9 @@ function Bfs() {
             .attr("fill", "white")
             .style("text-anchor", (d) => (d.children ? "end" : "start"))
             .text((d) => d.data.name);
-    }, [treeData, foundNode, visitedNodes]); // Re-render the tree when treeData, foundNode, or visitedNodes changes
+    }, [treeData, foundNode, visitedNodes, visitedLinks]);
 
-    // Function to generate a binary tree with a given number of nodes
     const generateNodes = (number) => {
-        setFoundNode(null);
-        setVisitedNodes([]);
         if (isNaN(number) || number <= 0) {
             alert("Please enter a valid number of nodes to generate!");
             return;
@@ -100,7 +93,6 @@ function Bfs() {
             while (count < num) {
                 const currentNode = queue.shift();
 
-                // Add left child
                 if (count < num) {
                     count++;
                     const leftChild = { name: `${count}`, children: [] };
@@ -108,7 +100,6 @@ function Bfs() {
                     queue.push(leftChild);
                 }
 
-                // Add right child
                 if (count < num) {
                     count++;
                     const rightChild = { name: `${count}`, children: [] };
@@ -122,10 +113,9 @@ function Bfs() {
 
         const newTreeData = createBinaryTree(number);
         setTreeData(newTreeData);
-        setNodeNumber(""); // Clear input field after generating nodes
+        setNodeNumber("");
     };
 
-    // Function to search and highlight a node by name
     const searchNodeName = (targetName) => {
         setFoundNode(null);
         setVisitedNodes([]);
@@ -144,27 +134,37 @@ function Bfs() {
                     currentNode.name,
                 ]);
                 if (currentNode.name === targetName) {
-                    setFoundNode(targetName); // Highlight the found node
+                    setFoundNode(targetName);
                     return;
                 }
                 if (currentNode.children) {
                     queue.push(...currentNode.children);
                 }
-                setTimeout(search, 500); // Recursively call search after 500ms delay
+                setTimeout(search, 500);
             };
             search();
         };
 
         bfsSearch(treeData);
-        setTargetNodeName(""); // Clear input field after searching
+        setTargetNodeName("");
     };
 
     return (
         <div>
             <Header />
             <SectionNav />
-            <h2>Breadth First Search Visualization</h2>
-            <svg ref={svgRef}></svg>
+            <div style={{ padding: "20px" }}>
+                <h2>Understanding Breadth-First Search (BFS)</h2>
+                <p>
+                    Breadth-First Search (BFS) is an algorithm for traversing or
+                    searching tree or graph data structures. It starts at the
+                    root node and explores all nodes at the present depth before
+                    moving on to the nodes at the next depth level. BFS is
+                    commonly used in shortest path algorithms and in situations
+                    where we need to explore all possible paths in an unweighted
+                    graph or tree.
+                </p>
+            </div>
             <div style={{ marginTop: "20px" }}>
                 <input
                     type="number"
@@ -177,6 +177,7 @@ function Bfs() {
                     Generate Nodes
                 </button>
             </div>
+
             <div style={{ marginTop: "20px" }}>
                 <input
                     type="text"
@@ -188,6 +189,57 @@ function Bfs() {
                 <button onClick={() => searchNodeName(targetNodeName)}>
                     Search Node
                 </button>
+            </div>
+            <div style={{ display: "flex", marginTop: "20px" }}>
+                <div
+                    style={{
+                        width: "20%",
+                        padding: "20px",
+                    }}
+                >
+                    <h3>Steps to Use</h3>
+                    <ol>
+                        <li>
+                            Enter the number of nodes to generate the binary
+                            tree.
+                        </li>
+                        <li>
+                            Click on &apos;Generate Nodes&apos; to create the
+                            tree.
+                        </li>
+                        <li>Enter the node name to search in the tree.</li>
+                        <li>
+                            Click on &apos;Search Node&apos; to start the BFS
+                            traversal.
+                        </li>
+                    </ol>
+                </div>
+
+                <div style={{ width: "60%", textAlign: "center" }}>
+                    <svg ref={svgRef}></svg>
+                </div>
+
+                <div
+                    style={{
+                        width: "20%",
+                        padding: "20px",
+                    }}
+                >
+                    <h3>Logs</h3>
+                    <div
+                        style={{
+                            height: "400px",
+                            overflowY: "scroll",
+                            padding: "10px",
+                            border: "1px solid #ccc",
+                        }}
+                    >
+                        {visitedNodes.map((node, index) => (
+                            <div key={index}>{`Visited Node: ${node}`}</div>
+                        ))}
+                        {foundNode && <div>{`Found Node: ${foundNode}`}</div>}
+                    </div>
+                </div>
             </div>
         </div>
     );

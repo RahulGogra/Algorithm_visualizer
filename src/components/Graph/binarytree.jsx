@@ -2,15 +2,16 @@ import { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 import Header from "../header";
 import SectionNav from "../sectionNav";
+import Style from "../../css/BinaryTree.module.css";
 
 function BinaryTree() {
     const svgRef = useRef(null);
 
     const [treeData, setTreeData] = useState(null); // Initialize with null to generate fresh data
-
     const [nodeNumber, setNodeNumber] = useState();
     const [targetNodeName, setTargetNodeName] = useState(""); // Node to be renamed
     const [newNodeName, setNewNodeName] = useState(""); // New name for the node
+    const [logs, setLogs] = useState([]); // Logs state to track actions
 
     // Effect to draw the tree when data changes
     useEffect(() => {
@@ -108,6 +109,12 @@ function BinaryTree() {
         const newTreeData = createBinaryTree(number);
         setTreeData(newTreeData);
         setNodeNumber("");
+
+        // Log the creation action
+        setLogs((prevLogs) => [
+            ...prevLogs,
+            `Generated tree with ${number} nodes`,
+        ]);
     };
 
     // Function to update the name of a node
@@ -143,6 +150,12 @@ function BinaryTree() {
         setTreeData(newTreeData);
         setTargetNodeName("");
         setNewNodeName("");
+
+        // Log the update action
+        setLogs((prevLogs) => [
+            ...prevLogs,
+            `Updated node ${targetName} to ${newName}`,
+        ]);
     };
 
     return (
@@ -150,39 +163,68 @@ function BinaryTree() {
             <Header />
             <SectionNav />
             <h2>Binary Tree Visualization</h2>
-            <svg ref={svgRef}></svg>
-            <div style={{ marginTop: "20px" }}>
-                <input
-                    type="number"
-                    value={nodeNumber}
-                    placeholder="Number of nodes"
-                    onChange={(e) => setNodeNumber(e.target.value)}
-                    style={{ marginRight: "10px" }}
-                />
-                <button onClick={() => generateNodes(parseInt(nodeNumber))}>
-                    Generate Nodes
-                </button>
-            </div>
-            <div style={{ marginTop: "20px" }}>
-                <input
-                    type="text"
-                    value={targetNodeName}
-                    placeholder="Current node name"
-                    onChange={(e) => setTargetNodeName(e.target.value)}
-                    style={{ marginRight: "10px" }}
-                />
-                <input
-                    type="text"
-                    value={newNodeName}
-                    placeholder="New node name"
-                    onChange={(e) => setNewNodeName(e.target.value)}
-                    style={{ marginRight: "10px" }}
-                />
-                <button
-                    onClick={() => updateNodeName(targetNodeName, newNodeName)}
+            <div className={Style.base}>
+                <div>
+                    <div className={Style.createTree}>
+                        <h3>Create Tree</h3>
+                        <input
+                            type="number"
+                            value={nodeNumber}
+                            placeholder="Number of nodes"
+                            onChange={(e) => setNodeNumber(e.target.value)}
+                            className={Style.input}
+                        />
+                        <button
+                            onClick={() => generateNodes(parseInt(nodeNumber))}
+                            className={Style.button}
+                        >
+                            Generate Nodes
+                        </button>
+                    </div>
+                    <div className={Style.UpdateTree}>
+                        <h3>Update Tree</h3>
+                        <input
+                            type="text"
+                            value={targetNodeName}
+                            placeholder="Current node name"
+                            onChange={(e) => setTargetNodeName(e.target.value)}
+                            className={Style.input}
+                        />
+                        <input
+                            type="text"
+                            value={newNodeName}
+                            placeholder="New node name"
+                            onChange={(e) => setNewNodeName(e.target.value)}
+                            className={Style.input}
+                        />
+                        <button
+                            onClick={() =>
+                                updateNodeName(targetNodeName, newNodeName)
+                            }
+                            className={Style.button}
+                        >
+                            Update Node Name
+                        </button>
+                    </div>
+                </div>
+                <div className={Style.svgdiv}>
+                    <svg ref={svgRef}></svg>
+                </div>
+                <div
+                    className={Style.Logs}
+                    style={{
+                        height: "600px",
+                        overflowY: "scroll",
+                        padding: "10px",
+                    }}
                 >
-                    Update Node Name
-                </button>
+                    <h3>Logs</h3>
+                    <div className={Style.Steps}>
+                        {logs.map((log, index) => (
+                            <div key={index}>{log}</div>
+                        ))}
+                    </div>
+                </div>
             </div>
         </div>
     );

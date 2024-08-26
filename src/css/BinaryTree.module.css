@@ -1,0 +1,54 @@
+.base {
+    display: flex;
+    justify-content: space-between;
+}
+
+.createTree {
+    display: flex;
+    flex-direction: column;
+}
+
+.UpdateTree {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.svgdiv {
+    height: 700px;
+    width: 700px;
+}
+
+.Logs {
+    width: 300px;
+    border: solid 2px #ccc;
+}
+
+.button {
+    background-color: #007bff;
+    width: fit-content;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+.button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.input {
+    padding: 5px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 200px;
+}

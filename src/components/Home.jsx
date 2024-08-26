@@ -112,7 +112,9 @@ const Home = () => {
                             <h2>Graph Traversal</h2>
                             <ul>
                                 <li>
-                                    <Link to="/binaryTree">Binary Tree</Link>
+                                    <Link to="/graph/binaryTree">
+                                        Binary Tree
+                                    </Link>
                                 </li>
                                 <li>
                                     <Link to="/graph/bfs">
