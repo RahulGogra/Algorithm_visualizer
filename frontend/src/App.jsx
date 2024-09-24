@@ -21,6 +21,9 @@ import Array from "./components/LinearDS/array";
 import Stack from "./components/LinearDS/stack";
 import Queue from "./components/LinearDS/queue";
 
+import Auth from "./user/auth";
+import Profile from "./user/profile";
+
 function App() {
     return (
         <Router>
@@ -42,6 +45,8 @@ function App() {
                 <Route path="/stack" element={<Stack />} />
                 <Route path="/queue" element={<Queue />} />
                 <Route path="/linklist" element={<Linklist />} />
+                <Route path="/Auth" element={<Auth />} />
+                <Route path="/profile" element={<Profile />} />
                 {/* Add more routes as needed */}
             </Routes>
         </Router>

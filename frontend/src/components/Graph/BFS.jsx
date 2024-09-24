@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import axios from "axios";
 import * as d3 from "d3";
 import Header from "../header";
 import SectionNav from "../sectionNav";
@@ -116,7 +117,7 @@ function Bfs() {
         setNodeNumber("");
     };
 
-    const searchNodeName = (targetName) => {
+    const searchNodeName = async (targetName) => {
         setFoundNode(null);
         setVisitedNodes([]);
         if (!targetName) {
@@ -145,6 +146,26 @@ function Bfs() {
             search();
         };
 
+        if (localStorage.getItem("userInfo")) {
+            const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+            const config = {
+                headers: {
+                    "Content-type": "application/json",
+                },
+            };
+            const { data } = await axios.post(
+                "http://localhost:5000/graph/bfs",
+                { userID: userInfo.userID, topic: "BFS", completed: true },
+                config
+            );
+
+            console.log("Submitted:", {
+                data,
+            });
+        }
+
+        console.log("*");
         bfsSearch(treeData);
         setTargetNodeName("");
     };

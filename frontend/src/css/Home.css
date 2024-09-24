@@ -20,7 +20,7 @@ h1 {
 }
 
 .Algo_button {
-    min-width: 200px;
+    min-width: 250px;
     min-height: 200px; /* Added minimum height for better layout */
     display: flex;
     flex-direction: column;

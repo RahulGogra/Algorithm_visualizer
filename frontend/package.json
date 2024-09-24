@@ -11,24 +11,23 @@
         "start": "nodemon backend/server/app.js"
     },
     "dependencies": {
+        "axios": "1.6.8",
         "bcryptjs": "^2.4.3",
-        "colors": "^1.4.0",
         "cookie-parser": "^1.4.6",
-        "cors": "^2.8.5",
         "d3": "^7.9.0",
-        "dotenv": "^16.4.5",
         "express": "^4.19.2",
-        "express-async-handler": "^1.2.0",
-        "express-session": "^1.18.0",
         "jsonwebtoken": "^9.0.2",
-        "mongodb": "^6.9.0",
-        "mongoose": "^8.6.2",
-        "nodemon": "^3.1.0",
+        "mongoose": "^8.6.0",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
         "react-grid-layout": "^1.4.4",
         "react-modal": "^3.16.1",
-        "react-router-dom": "^6.24.0"
+        "react-router-dom": "^6.24.0",
+        "colors": "^1.4.0",
+        "cors": "^2.8.5",
+        "dotenv": "^16.4.5",
+        "express-async-handler": "^1.2.0",
+        "nodemon": "^3.1.0"
     },
     "devDependencies": {
         "@types/react": "^18.3.3",
