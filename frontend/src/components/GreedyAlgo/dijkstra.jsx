@@ -1,6 +1,6 @@
 import Header from "../header";
 import { useState, useEffect } from "react";
-import "../../css/grid.css";
+import styles from "../../css/grid.module.css"; // Importing the CSS module
 import SectionNav from "../sectionNav";
 
 const Dijkstra = () => {
@@ -179,7 +179,7 @@ const Dijkstra = () => {
         <>
             <Header />
             <SectionNav />
-            <div className="theory-section">
+            <div className={styles.theorySection}>
                 <h2>Dijkstra&apos;s Algorithm</h2>
                 <p>
                     Dijkstra&apos;s algorithm is a famous algorithm used for
@@ -192,8 +192,8 @@ const Dijkstra = () => {
                     node or all nodes have been visited.
                 </p>
             </div>
-            <div className="grid-box">
-                <div className="instructions">
+            <div className={styles.gridBox}>
+                <div className={styles.instructions}>
                     <h3>Instructions</h3>
                     <p>Select mode:</p>
                     <ul>
@@ -205,7 +205,7 @@ const Dijkstra = () => {
                     <button onClick={handleClear} disabled={state.isSearching}>
                         Clear All
                     </button>
-                    <div className="select-wrapper">
+                    <div className={styles.selectWrapper}>
                         <select
                             onChange={(e) => setInputMode(e.target.value)}
                             disabled={state.isSearching}
@@ -220,34 +220,38 @@ const Dijkstra = () => {
                         Find Path
                     </button>
                 </div>
-                <div className="grid-container">
+                <div className={styles.gridContainer}>
                     {grid.map((row, rowIndex) => (
-                        <div key={rowIndex} className="grid-row">
+                        <div key={rowIndex} className={styles.gridRow}>
                             {row.map((cell, colIndex) => (
                                 <div
                                     key={cell.id}
-                                    className={`grid-cell ${
-                                        state.start === cell.id ? "start" : ""
-                                    } ${state.end === cell.id ? "end" : ""} ${
+                                    className={`${styles.gridCell} ${
+                                        state.start === cell.id
+                                            ? styles.start
+                                            : ""
+                                    } ${
+                                        state.end === cell.id ? styles.end : ""
+                                    } ${
                                         state.walls.includes(cell.id)
-                                            ? "wall"
+                                            ? styles.wall
                                             : ""
                                     } ${
                                         state.weights.includes(cell.id)
-                                            ? "weight"
+                                            ? styles.weight
                                             : ""
                                     } ${
                                         state.path.some(
                                             (pathCell) =>
                                                 pathCell.id === cell.id
                                         )
-                                            ? "path"
+                                            ? styles.path
                                             : ""
                                     } ${
                                         state.visitedNodes.some(
                                             (visited) => visited.id === cell.id
                                         )
-                                            ? "visited"
+                                            ? styles.visited
                                             : ""
                                     }`}
                                     onClick={() =>
@@ -260,7 +264,7 @@ const Dijkstra = () => {
                         </div>
                     ))}
                 </div>
-                <div className="steps">
+                <div className={styles.steps}>
                     <h3>Steps</h3>
                     <p>{currentStep}</p>
                 </div>

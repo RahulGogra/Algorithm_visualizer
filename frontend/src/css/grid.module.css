@@ -2,7 +2,7 @@
 /* dijkstra.css */
 /* dijkstra.css */
 
-.theory-section {
+.theorySection {
     text-align: center;
     margin: 20px;
 }
@@ -73,14 +73,14 @@
 }
 
 /* Custom select wrapper */
-.select-wrapper {
+.selectWrapper {
     position: relative;
     display: inline-block;
     width: 160px; /* Adjust as needed */
     margin: 5px;
 }
 
-.select-wrapper select {
+.selectWrapper select {
     width: 100%;
     padding: 8px 12px;
     border: 1px solid #888;
@@ -92,14 +92,14 @@
     font-size: 14px;
 }
 
-.select-wrapper select:disabled {
+.selectWrapper select:disabled {
     background-color: #e0e0e0;
     color: #aaa;
     cursor: not-allowed;
 }
 
 /* Dropdown arrow styling */
-.select-wrapper::after {
+.selectWrapper::after {
     content: "▼";
     position: absolute;
     right: 12px;
@@ -110,12 +110,12 @@
     color: #333;
 }
 
-.grid-box {
+.gridBox {
     display: flex;
     justify-content: center;
 }
 /* Grid Container */
-.grid-container {
+.gridContainer {
     display: grid;
     grid-template-columns: repeat(20, 1fr); /* 10 columns */
     border: 1px solid #ccc; /* Border around the grid */
@@ -125,7 +125,7 @@
 }
 
 /* Grid Cell */
-.grid-cell {
+.gridCell {
     height: 30px; /* Cell height */
     line-height: 30px; /* Vertical centering */
     text-align: center;
@@ -136,7 +136,7 @@
 }
 
 /* Hover effect */
-.grid-cell:hover {
+.gridCell:hover {
     background-color: #393838;
 }
 
