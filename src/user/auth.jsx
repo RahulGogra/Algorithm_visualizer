@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import LoginForm from "../user/login";
-import RegisterForm from "../user/register";
+import LoginForm from "./login";
+import RegisterForm from "./register";
 import Header from "../components/header";
 
 const Auth = () => {
