@@ -9,4 +9,9 @@ export default defineConfig({
             external: ["axios"], // Mark 'axios' as an external dependency
         },
     },
+    resolve: {
+        alias: {
+            axios: "axios", // Explicitly alias the axios package
+        },
+    },
 });
