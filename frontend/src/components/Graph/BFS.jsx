@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import * as d3 from "d3";
@@ -155,7 +156,7 @@ function Bfs() {
                 },
             };
             const { data } = await axios.post(
-                "http://localhost:5000/graph/bfs",
+                "http://localhost:5000/user/topic",
                 { userID: userInfo.userID, topic: "BFS", completed: true },
                 config
             );

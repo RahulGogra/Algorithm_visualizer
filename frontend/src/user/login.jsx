@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -18,6 +19,7 @@ const Login = () => {
             headers: {
                 "Content-type": "application/json",
             },
+            withCredentials: true,
         };
         const { data } = await axios.post(
             "http://localhost:5000/user/login",

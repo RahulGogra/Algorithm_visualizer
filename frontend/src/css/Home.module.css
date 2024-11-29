@@ -19,7 +19,7 @@ h1 {
     line-height: 1.6;
 }
 
-.Algo_button {
+.AlgoButton {
     min-width: 250px;
     min-height: 200px; /* Added minimum height for better layout */
     display: flex;
@@ -36,24 +36,24 @@ h1 {
     overflow: hidden; /* Ensure child elements do not overflow */
 }
 
-.Algo_button img {
+.AlgoButton img {
     width: 120px;
     height: 120px;
     margin-bottom: 10px;
 }
 
-.Algo_button span {
+.AlgoButton span {
     font-size: 18px;
     color: #007bff;
 }
 
-.Algo_button:hover {
+.AlgoButton:hover {
     transform: scale(1.05);
     background-color: #383838;
 }
 
 /* New styles for displaying the links on hover */
-.Algo_button .Algo_list {
+.AlgoButton .AlgoList {
     display: none;
     position: absolute;
     top: 0;
@@ -69,32 +69,32 @@ h1 {
     text-align: center;
 }
 
-.Algo_button:hover .Algo_list {
+.AlgoButton:hover .AlgoList {
     display: flex;
     flex-direction: column;
 }
 
 /* Ensures proper styling of list items */
-.Algo_list ul {
+.AlgoList ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
-.Algo_list h2 {
+.AlgoList h2 {
     padding: 0;
     margin: 0;
 }
 
-.Algo_list li {
+.AlgoList li {
     margin: 10px 0;
 }
 
-.Algo_list a {
+.AlgoList a {
     color: #007bff;
     text-decoration: none;
     font-size: 18px;
 }
 
-.Algo_list a:hover {
+.AlgoList a:hover {
     text-decoration: underline;
 }

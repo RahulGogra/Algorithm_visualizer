@@ -1,5 +1,8 @@
+// eslint-disable-next-line no-unused-vars
+import React from "react";
 import { useState, useEffect, useRef } from "react";
 import * as d3 from "d3";
+import axios from "axios";
 import Header from "../header";
 import SectionNav from "../sectionNav";
 import styles from "../../css/BellmanFord.module.css";
@@ -151,9 +154,32 @@ const BellmanFord = () => {
         setData({ nodes, links, adjacencyList });
     };
 
-    const handleSearch = () => {
+    const handleSearch = async () => {
         try {
             bellmanFord(data, searchSource, searchTarget);
+
+            if (localStorage.getItem("userInfo")) {
+                const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+                const config = {
+                    headers: {
+                        "Content-type": "application/json",
+                    },
+                };
+                const { data } = await axios.post(
+                    "http://localhost:5000/user/topic",
+                    {
+                        userID: userInfo.userID,
+                        topic: "Bellman Ford",
+                        completed: true,
+                    },
+                    config
+                );
+
+                console.log("Submitted:", {
+                    data,
+                });
+            }
         } catch (error) {
             console.error(error);
             alert("Error: " + error.message);

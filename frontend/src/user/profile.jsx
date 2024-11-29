@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/header";
@@ -20,19 +21,44 @@ const Profile = () => {
                 userID: storedUserInfo.userID,
             });
         }
-
-        axios
-            .get("http://localhost:5000/user/progress")
-            .then((response) => {
-                setProgress(response.topic); // Set the received data to the state
-            })
-            .catch((error) => {
-                console.error("Error fetching data:", error);
-            });
     }, []);
 
-    const handleLogout = () => {
-        localStorage.removeItem("userInfo"); // Clear the user info from localStorage
+    const fetchProgress = async () => {
+        try {
+            // Make a GET request to /user/progress
+            const response = await axios.get(
+                "http://localhost:5000/user/progress",
+                {
+                    params: {
+                        userID: user.userID,
+                    },
+                    withCredentials: true, // Important to include cookies with the request
+                }
+            );
+            setProgress(response.data);
+            // Handle the response
+            console.log(response.data); // This will give you the user's progress data
+        } catch (error) {
+            console.error(
+                "Error fetching progress:",
+                error.response?.data || error.message
+            );
+        }
+    };
+
+    const handleLogout = async () => {
+        localStorage.clear();
+        const config = {
+            headers: {
+                "Content-type": "application/json",
+            },
+            withCredentials: true,
+        };
+        const { data } = await axios.post(
+            "http://localhost:5000/user/logout",
+            config
+        );
+        console.log(data);
         navigate("/"); // Redirect to the login or home page
     };
 
@@ -73,6 +99,12 @@ const Profile = () => {
                                         </li>
                                     ))}
                                 </ul>
+                                <button
+                                    onClick={fetchProgress}
+                                    className="logout-button"
+                                >
+                                    Progress
+                                </button>
 
                                 <button
                                     onClick={handleLogout}

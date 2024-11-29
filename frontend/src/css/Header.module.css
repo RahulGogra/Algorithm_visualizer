@@ -7,11 +7,11 @@
     border-bottom: 2px solid #e9ecef; /* Optional border for separation */
 }
 
-.home-button-container {
+.homeButtonContainer {
     flex: 0 0 auto; /* Ensure it doesn't grow or shrink */
 }
 
-.home-button {
+.homeButton {
     padding: 10px 20px;
     background-color: #007bff;
     color: white;
@@ -21,7 +21,7 @@
     transition: background-color 0.3s ease;
 }
 
-.home-button:hover {
+.homeButton:hover {
     background-color: #237da3;
 }
 

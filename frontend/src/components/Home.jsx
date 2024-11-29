@@ -1,4 +1,5 @@
-import "../css/Home.css";
+import React from "react";
+import styles from "../css/Home.module.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "./header";
@@ -25,18 +26,18 @@ const Home = () => {
     return (
         <>
             <Header />
-            <div className="Algorithms">
+            <div className={styles.Algorithms}>
                 <p>
                     This web application helps you visualize various data
                     structures and algorithms. You can explore different
                     algorithms and understand how they work with step-by-step
                     visualizations. Click on the buttons below to get started!
                 </p>
-                <div className="Algo_button" onClick={setSearchAlgo}>
+                <div className={styles.AlgoButton} onClick={setSearchAlgo}>
                     <img src="/searching.jpg" alt="Searching Algorithms" />
                     <span>Searching Algorithms</span>
                     {searching === "Searching" && (
-                        <div className="Algo_list">
+                        <div className={styles.AlgoList}>
                             <h2>Searching Algorithms</h2>
                             <ul>
                                 <li>
@@ -53,11 +54,11 @@ const Home = () => {
                         </div>
                     )}
                 </div>
-                <div className="Algo_button" onClick={setGreedyAlgo}>
+                <div className={styles.AlgoButton} onClick={setGreedyAlgo}>
                     <img src="/greedy.jpg" alt="Greedy Algorithms" />
                     <span>Greedy Algorithms</span>
                     {searching === "Greedy" && (
-                        <div className="Algo_list">
+                        <div className={styles.AlgoList}>
                             <h2>Greedy Algorithms</h2>
                             <ul>
                                 <li>
@@ -72,11 +73,11 @@ const Home = () => {
                         </div>
                     )}
                 </div>
-                <div className="Algo_button" onClick={setSortAlgo}>
+                <div className={styles.AlgoButton} onClick={setSortAlgo}>
                     <img src="/sorting.png" alt="Sorting Algorithms" />
                     <span>Sorting Algorithms</span>
                     {searching === "Sorting" && (
-                        <div className="Algo_list">
+                        <div className={styles.AlgoList}>
                             <h2>Sorting Algorithms</h2>
                             <ul>
                                 <li>
@@ -104,11 +105,11 @@ const Home = () => {
                         </div>
                     )}
                 </div>
-                <div className="Algo_button" onClick={setGraphTraversal}>
+                <div className={styles.AlgoButton} onClick={setGraphTraversal}>
                     <img src="/graphTraversal.jpg" alt="Graph Traversal" />
                     <span>Graph Traversal</span>
                     {searching === "GraphTraversal" && (
-                        <div className="Algo_list">
+                        <div className={styles.AlgoList}>
                             <h2>Graph Traversal</h2>
                             <ul>
                                 <li>
@@ -130,11 +131,11 @@ const Home = () => {
                         </div>
                     )}
                 </div>
-                <div className="Algo_button" onClick={setLinearDS}>
+                <div className={styles.AlgoButton} onClick={setLinearDS}>
                     <img src="/graphTraversal.jpg" alt="Graph Traversal" />
                     <span>Linear Data Structures</span>
                     {searching === "LinearDS" && (
-                        <div className="Algo_list">
+                        <div className={styles.AlgoList}>
                             <h2>Linear Data Structures</h2>
                             <ul>
                                 <li>

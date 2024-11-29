@@ -1,7 +1,10 @@
+// eslint-disable-next-line no-unused-vars
+import React from "react";
 import Header from "../header";
 import { useState, useEffect } from "react";
 import styles from "../../css/grid.module.css"; // Importing the CSS module
 import SectionNav from "../sectionNav";
+import axios from "axios";
 
 const Dijkstra = () => {
     const [rows] = useState(20); // Number of rows
@@ -173,6 +176,25 @@ const Dijkstra = () => {
             isSearching: false,
         }));
         setCurrentStep("Path found!");
+
+        if (localStorage.getItem("userInfo")) {
+            const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+            const config = {
+                headers: {
+                    "Content-type": "application/json",
+                },
+            };
+            const { data } = await axios.post(
+                "http://localhost:5000/user/topic",
+                { userID: userInfo.userID, topic: "Dijkstra", completed: true },
+                config
+            );
+
+            console.log("Submitted:", {
+                data,
+            });
+        }
     };
 
     return (

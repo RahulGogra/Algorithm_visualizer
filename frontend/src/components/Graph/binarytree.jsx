@@ -1,5 +1,7 @@
+import React from "react";
 import { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
+import axios from "axios";
 import Header from "../header";
 import SectionNav from "../sectionNav";
 import Style from "../../css/BinaryTree.module.css";
@@ -118,7 +120,7 @@ function BinaryTree() {
     };
 
     // Function to update the name of a node
-    const updateNodeName = (targetName, newName) => {
+    const updateNodeName = async (targetName, newName) => {
         if (!targetName || !newName) {
             alert(
                 "Both the current node name and the new node name must be provided!"
@@ -145,6 +147,29 @@ function BinaryTree() {
         if (!updateNode(newTreeData)) {
             alert("Node not found!");
             return;
+        }
+
+        if (localStorage.getItem("userInfo")) {
+            const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+            const config = {
+                headers: {
+                    "Content-type": "application/json",
+                },
+            };
+            const { data } = await axios.post(
+                "http://localhost:5000/user/topic",
+                {
+                    userID: userInfo.userID,
+                    topic: "Binary Tree",
+                    completed: true,
+                },
+                config
+            );
+
+            console.log("Submitted:", {
+                data,
+            });
         }
 
         setTreeData(newTreeData);

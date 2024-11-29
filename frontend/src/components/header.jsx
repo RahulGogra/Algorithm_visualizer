@@ -1,5 +1,6 @@
+import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import "../css/Header.css";
+import styles from "../css/Header.module.css";
 
 const Header = () => {
     const location = useLocation();
@@ -10,10 +11,10 @@ const Header = () => {
     const data = JSON.parse(localStorage.getItem("userInfo")) || {};
 
     return (
-        <div className="header">
+        <div className={styles.header}>
             {path !== "/" && (
-                <div className="home-button-container">
-                    <Link to="/" className="home-button">
+                <div className={styles.homeButtonContainer}>
+                    <Link to="/" className={styles.homeButton}>
                         Home
                     </Link>
                 </div>
@@ -33,7 +34,7 @@ const Header = () => {
                         </div>
                         <button
                             onClick={() => navigate("/Profile")}
-                            className="login-button"
+                            className={styles.loginButton}
                         >
                             {data.user}
                         </button>
@@ -41,7 +42,7 @@ const Header = () => {
                 ) : (
                     <button
                         onClick={() => navigate("/Auth")}
-                        className="login-button"
+                        className={styles.loginButton}
                     >
                         Login/Register
                     </button>

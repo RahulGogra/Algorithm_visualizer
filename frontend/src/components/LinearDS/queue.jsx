@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import Header from "../header";
 import styles from "../../css/Queue.module.css";
