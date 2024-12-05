@@ -21,7 +21,7 @@
     margin: 10px 0;
     padding: 10px 20px;
     background-color: #4caf50;
-    color: white;
+    color: var(--text-color);
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -36,6 +36,9 @@
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-size: 24px;
 }
 
 .label {
@@ -53,11 +56,12 @@
     width: 300px;
     margin-top: 20px;
     font-weight: bold;
-    color: #ffffff;
+    color: var(--text-color);
 }
 
 .svgContainer svg {
     margin-top: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    background-color: #242424;
 }

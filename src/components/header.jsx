@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styles from "../css/Header.module.css";
 
@@ -9,7 +9,27 @@ const Header = () => {
 
     // Safely handle localStorage data parsing
     const data = JSON.parse(localStorage.getItem("userInfo")) || {};
+    const [theme, setTheme] = useState("dark");
 
+    useEffect(() => {
+        // Apply saved theme from localStorage
+        const savedTheme = localStorage.getItem("theme") || "dark";
+        setTheme(savedTheme);
+        document.documentElement.classList.toggle(
+            "light-theme",
+            savedTheme === "light"
+        );
+    }, []);
+
+    const toggleTheme = () => {
+        const newTheme = theme === "dark" ? "light" : "dark";
+        setTheme(newTheme);
+        localStorage.setItem("theme", newTheme);
+        document.documentElement.classList.toggle(
+            "light-theme",
+            newTheme === "light"
+        );
+    };
     return (
         <div className={styles.header}>
             {path !== "/" && (
@@ -21,6 +41,12 @@ const Header = () => {
             )}
 
             <h1>Algo Visualizer</h1>
+
+            <div>
+                <button onClick={toggleTheme} aria-label="Toggle theme">
+                    {theme === "dark" ? "🌞 Light Mode" : "🌙 Dark Mode"}
+                </button>
+            </div>
 
             <div>
                 {data.user ? (

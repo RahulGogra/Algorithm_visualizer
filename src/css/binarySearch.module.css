@@ -7,9 +7,11 @@
 }
 
 .arrayContainer {
+    padding: 10px;
     display: flex;
     justify-content: center;
     margin: 20px 0;
+    border: 2px solid var(--border-color);
 }
 
 .arrayBar {
@@ -19,7 +21,7 @@
     align-items: flex-end;
     justify-content: center;
     transition: background-color 0.3s ease;
-    color: white;
+    color: var(--text-color);
     font-size: 12px;
     padding: 2px;
     box-sizing: border-box;
@@ -35,7 +37,7 @@
     margin-left: 20px;
     text-align: left;
     max-width: 300px;
-    background-color: #313131;
+    background-color: var(--background-color);
     padding: 10px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -60,7 +62,7 @@
 
 button {
     background-color: #007bff;
-    color: white;
+    color: var(--text-color);
     border: none;
     padding: 10px 20px;
     margin: 5px;
@@ -82,6 +84,8 @@ input[type="number"] {
     padding: 5px;
     margin: 5px;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
     width: 200px;
+    background-color: var(--background-color);
+    color: var(--text-color);
 }

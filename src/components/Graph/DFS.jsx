@@ -1,9 +1,9 @@
-import React from "react";
 import { useState, useEffect, useRef } from "react";
 import * as d3 from "d3";
 import Header from "../header";
 import SectionNav from "../sectionNav";
 import axios from "axios";
+import styles from "../../css/Bfs.module.css";
 
 const Dfs = () => {
     const svgRef = useRef(null);
@@ -199,15 +199,43 @@ const Dfs = () => {
         <div>
             <Header />
             <SectionNav />
-            <h2>Depth First Search Visualization</h2>
-            <p>
-                Depth First Search (DFS) is an algorithm used for traversing or
-                searching tree or graph data structures. The algorithm starts at
-                the root node and explores as far as possible along each branch
-                before backtracking.
-            </p>
+            <div className={styles.container}>
+                <h2 className={styles.heading}>
+                    Depth First Search Visualization
+                </h2>
+                <p className={styles.paragraph}>
+                    Depth First Search (DFS) is an algorithm used for traversing
+                    or searching tree or graph data structures. The algorithm
+                    starts at the root node and explores as far as possible
+                    along each branch before backtracking.
+                </p>
+            </div>
+            <div className={styles.inputContainer}>
+                <input
+                    type="number"
+                    value={nodeNumber}
+                    placeholder="Number of nodes"
+                    onChange={(e) => setNodeNumber(e.target.value)}
+                    style={{ marginRight: "10px" }}
+                />
+                <button onClick={() => generateNodes(parseInt(nodeNumber))}>
+                    Generate Nodes
+                </button>
+            </div>
+            <div className={styles.inputContainer}>
+                <input
+                    type="text"
+                    value={targetNodeName}
+                    placeholder="Node name to search"
+                    onChange={(e) => setTargetNodeName(e.target.value)}
+                    style={{ marginRight: "10px" }}
+                />
+                <button onClick={() => searchNodeName(targetNodeName)}>
+                    Search Node
+                </button>
+            </div>
             <div style={{ display: "flex", marginTop: "20px" }}>
-                <div style={{ flex: "1", marginRight: "20px" }}>
+                <div className={styles.stepsContainer}>
                     <h3>Steps</h3>
                     <ul>
                         <li>
@@ -225,45 +253,13 @@ const Dfs = () => {
                         </li>
                     </ul>
                 </div>
-                <div style={{ flex: "2" }}>
-                    <div style={{ marginBottom: "20px" }}>
-                        <input
-                            type="number"
-                            value={nodeNumber}
-                            placeholder="Number of nodes"
-                            onChange={(e) => setNodeNumber(e.target.value)}
-                            style={{ marginRight: "10px" }}
-                        />
-                        <button
-                            onClick={() => generateNodes(parseInt(nodeNumber))}
-                        >
-                            Generate Nodes
-                        </button>
-                    </div>
-                    <div style={{ marginBottom: "20px" }}>
-                        <input
-                            type="text"
-                            value={targetNodeName}
-                            placeholder="Node name to search"
-                            onChange={(e) => setTargetNodeName(e.target.value)}
-                            style={{ marginRight: "10px" }}
-                        />
-                        <button onClick={() => searchNodeName(targetNodeName)}>
-                            Search Node
-                        </button>
-                    </div>
+
+                <div className={styles.svgContainer}>
                     <svg ref={svgRef}></svg>
                 </div>
-                <div style={{ flex: "1", marginLeft: "20px" }}>
+                <div className={styles.logsContainer}>
                     <h3>Logs</h3>
-                    <div
-                        style={{
-                            height: "400px",
-                            overflowY: "scroll",
-                            padding: "10px",
-                            border: "1px solid #ccc",
-                        }}
-                    >
+                    <div className={styles.logs}>
                         {logs.map((log, index) => (
                             <div key={index}>{log}</div>
                         ))}

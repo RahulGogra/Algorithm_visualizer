@@ -90,11 +90,13 @@
     -moz-appearance: none;
     cursor: pointer;
     font-size: 14px;
+    background-color: var(--background-color);
+    color: var(--text-color);
 }
 
 .selectWrapper select:disabled {
-    background-color: #e0e0e0;
-    color: #aaa;
+    background-color: var(--background-color);
+    color: var(--text-color);
     cursor: not-allowed;
 }
 
@@ -107,7 +109,7 @@
     transform: translateY(-50%);
     pointer-events: none;
     font-size: 12px;
-    color: #333;
+    color: var(--text-color);
 }
 
 .gridBox {

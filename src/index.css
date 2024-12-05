@@ -1,14 +1,31 @@
+/* Default theme (dark mode) */
 :root {
+    --background-color: #242424;
+    --text-color: rgba(255, 255, 255, 0.87);
+    --border-color: #e9ecef;
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;
 
     color-scheme: light dark;
-    color: rgba(255, 255, 255, 0.87);
-    background-color: #242424;
-
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+/* Light theme */
+.light-theme {
+    --background-color: #ffffff;
+    --text-color: #242424;
+    --border-color: #e9ecef;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+/* Transition for smooth theme changes */
+body {
+    transition: background-color 0.3s, color 0.3s;
 }

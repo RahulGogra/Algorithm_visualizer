@@ -1,6 +1,5 @@
-import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Home from "./components/Home"; // Adjust the path as necessary
+import Home from "./components/Home";
 import BubbleSort from "./components/SortingAlgo/bubbleSort";
 import QuickSort from "./components/SortingAlgo/quickSort";
 import MergeSort from "./components/SortingAlgo/mergeSort";

@@ -14,7 +14,7 @@
 .homeButton {
     padding: 10px 20px;
     background-color: #007bff;
-    color: white;
+    color: var(--text-color);
     text-decoration: none;
     border-radius: 5px;
     font-size: 16px;
@@ -29,5 +29,5 @@
     flex: 1; /* Allow the heading to take up remaining space */
     text-align: center; /* Center the text */
     margin: 0; /* Remove default margin */
-    color: #e6ebf0; /* Dark text color */
+    color: var(--text-color); /* Dark text color */
 }

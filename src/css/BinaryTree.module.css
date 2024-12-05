@@ -17,17 +17,19 @@
 .svgdiv {
     height: 700px;
     width: 700px;
+    background-color: #242424;
+    border: 2px solid var(--border-color);
 }
 
 .Logs {
     width: 300px;
-    border: solid 2px #ccc;
+    border: solid 2px var(--border-color);
 }
 
 .button {
     background-color: #007bff;
     width: fit-content;
-    color: white;
+    color: var(--text-color);
     border: none;
     padding: 10px 20px;
     margin: 5px;
@@ -49,6 +51,8 @@
     padding: 5px;
     margin: 5px;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
     width: 200px;
+    background-color: var(--background-color);
+    color: var(--text-color);
 }

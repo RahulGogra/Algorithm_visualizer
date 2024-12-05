@@ -1,9 +1,9 @@
-import React from "react";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import * as d3 from "d3";
 import Header from "../header";
 import SectionNav from "../sectionNav";
+import styles from "../../css/Bfs.module.css";
 
 function Bfs() {
     const svgRef = useRef(null);
@@ -175,9 +175,11 @@ function Bfs() {
         <div>
             <Header />
             <SectionNav />
-            <div style={{ padding: "20px" }}>
-                <h2>Understanding Breadth-First Search (BFS)</h2>
-                <p>
+            <div className={styles.container}>
+                <h2 className={styles.heading}>
+                    Understanding Breadth-First Search (BFS)
+                </h2>
+                <p className={styles.paragraph}>
                     Breadth-First Search (BFS) is an algorithm for traversing or
                     searching tree or graph data structures. It starts at the
                     root node and explores all nodes at the present depth before
@@ -187,38 +189,41 @@ function Bfs() {
                     graph or tree.
                 </p>
             </div>
-            <div style={{ marginTop: "20px" }}>
+
+            <div className={styles.inputContainer}>
                 <input
                     type="number"
                     value={nodeNumber}
                     placeholder="Number of nodes"
                     onChange={(e) => setNodeNumber(e.target.value)}
-                    style={{ marginRight: "10px" }}
+                    className={styles.input}
                 />
-                <button onClick={() => generateNodes(parseInt(nodeNumber))}>
+                <button
+                    onClick={() => generateNodes(parseInt(nodeNumber))}
+                    className={styles.button}
+                >
                     Generate Nodes
                 </button>
             </div>
 
-            <div style={{ marginTop: "20px" }}>
+            <div className={styles.inputContainer}>
                 <input
                     type="text"
                     value={targetNodeName}
                     placeholder="Node name to search"
                     onChange={(e) => setTargetNodeName(e.target.value)}
-                    style={{ marginRight: "10px" }}
+                    className={styles.input}
                 />
-                <button onClick={() => searchNodeName(targetNodeName)}>
+                <button
+                    onClick={() => searchNodeName(targetNodeName)}
+                    className={styles.button}
+                >
                     Search Node
                 </button>
             </div>
+
             <div style={{ display: "flex", marginTop: "20px" }}>
-                <div
-                    style={{
-                        width: "20%",
-                        padding: "20px",
-                    }}
-                >
+                <div className={styles.stepsContainer}>
                     <h3>Steps to Use</h3>
                     <ol>
                         <li>
@@ -237,29 +242,23 @@ function Bfs() {
                     </ol>
                 </div>
 
-                <div style={{ width: "60%", textAlign: "center" }}>
+                <div className={styles.svgContainer}>
                     <svg ref={svgRef}></svg>
                 </div>
 
-                <div
-                    style={{
-                        width: "20%",
-                        padding: "20px",
-                    }}
-                >
+                <div className={styles.logsContainer}>
                     <h3>Logs</h3>
-                    <div
-                        style={{
-                            height: "400px",
-                            overflowY: "scroll",
-                            padding: "10px",
-                            border: "1px solid #ccc",
-                        }}
-                    >
+                    <div className={styles.logs}>
                         {visitedNodes.map((node, index) => (
-                            <div key={index}>{`Visited Node: ${node}`}</div>
+                            <div key={index} className={styles.visitedNode}>
+                                {`Visited Node: ${node}`}
+                            </div>
                         ))}
-                        {foundNode && <div>{`Found Node: ${foundNode}`}</div>}
+                        {foundNode && (
+                            <div
+                                className={styles.foundNode}
+                            >{`Found Node: ${foundNode}`}</div>
+                        )}
                     </div>
                 </div>
             </div>
