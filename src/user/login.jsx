@@ -22,7 +22,7 @@ const Login = () => {
             withCredentials: true,
         };
         const { data } = await axios.post(
-            "http://localhost:5000/user/login",
+            "https://algorithm-visualizer-api.vercel.app/user/login",
             { email, password },
             config
         );

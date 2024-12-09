@@ -12,6 +12,7 @@ const app = express();
 app.use(
     cors({
         origin: "*", // Frontend origin
+        methods: ["GET", "POST", "PUT", "DELETE"],
         credentials: true, // Allow credentials (cookies, sessions, etc.)
     }),
     helmet({

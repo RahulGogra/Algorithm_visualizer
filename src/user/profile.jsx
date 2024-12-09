@@ -27,7 +27,7 @@ const Profile = () => {
         try {
             // Make a GET request to /user/progress
             const response = await axios.get(
-                "http://localhost:5000/user/progress",
+                import.meta.env.HOST + "/user/progress",
                 {
                     params: {
                         userID: user.userID,
@@ -55,7 +55,7 @@ const Profile = () => {
             withCredentials: true,
         };
         const { data } = await axios.post(
-            "http://localhost:5000/user/logout",
+            import.meta.env.HOST + "/user/logout",
             config
         );
         console.log(data);
