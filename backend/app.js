@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const connectDB = require("./db/connect");
 const Users = require("./modals/userModal");
 const Progress = require("./modals/progressModal");
+const helmet = require("helmet");
 require("colors");
 
 dotenv.config();
@@ -12,11 +13,24 @@ app.use(
     cors({
         origin: "*", // Frontend origin
         credentials: true, // Allow credentials (cookies, sessions, etc.)
+    }),
+    helmet({
+        contentSecurityPolicy: {
+            directives: {
+                defaultSrc: ["'self'"],
+                scriptSrc: ["'self'", "'unsafe-inline'", "https://vercel.live"],
+                connectSrc: ["'self'", "https://vercel.live"],
+            },
+        },
     })
 );
 app.use(express.json());
 
 connectDB();
+
+app.get("/", (req, res) => {
+    res.send("Hello, World!");
+});
 
 // User login route
 app.post("/user/login", async (req, res) => {
