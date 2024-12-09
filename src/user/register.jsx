@@ -22,7 +22,7 @@ const Register = () => {
             withCredentials: true,
         };
         const { data } = await axios.post(
-            import.meta.env.HOST + "/user/register",
+            "http://localhost:5000/user/register",
             { username, email, password },
             config
         );

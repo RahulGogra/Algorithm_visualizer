@@ -4,34 +4,34 @@ const dotenv = require("dotenv");
 const connectDB = require("./db/connect");
 const Users = require("./modals/userModal");
 const Progress = require("./modals/progressModal");
-const helmet = require("helmet");
 require("colors");
 
 dotenv.config();
 const app = express();
+
+const allowedOrigins = [
+    "http://localhost:5173", // Frontend origin 1
+    "http://localhost:3000", // Frontend origin 2 (if you have another local instance)
+    "https://algorithm-visualizer-api.vercel.app", // Production frontend
+    // Add other origins as needed
+];
+
 app.use(
     cors({
-        origin: "*", // Frontend origin
-        methods: ["GET", "POST", "PUT", "DELETE"],
-        credentials: true, // Allow credentials (cookies, sessions, etc.)
-    }),
-    helmet({
-        contentSecurityPolicy: {
-            directives: {
-                defaultSrc: ["'self'"],
-                scriptSrc: ["'self'", "'unsafe-inline'", "https://vercel.live"],
-                connectSrc: ["'self'", "https://vercel.live"],
-            },
+        origin: (origin, callback) => {
+            // Allow requests with no origin (like from Postman or curl)
+            if (!origin || allowedOrigins.includes(origin)) {
+                callback(null, true); // Allow the request
+            } else {
+                callback(new Error("Not allowed by CORS")); // Reject the request
+            }
         },
+        credentials: true, // Allow credentials (cookies, sessions, etc.)
     })
 );
 app.use(express.json());
 
 connectDB();
-
-app.get("/", (req, res) => {
-    res.send("Hello, World!");
-});
 
 // User login route
 app.post("/user/login", async (req, res) => {
