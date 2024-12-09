@@ -1,9 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
-const connectDB = require("../db/connect");
-const Users = require("../modals/userModal");
-const Progress = require("../modals/progressModal");
+const connectDB = require("./db/connect");
+const Users = require("./modals/userModal");
+const Progress = require("./modals/progressModal");
 require("colors");
 
 dotenv.config();
