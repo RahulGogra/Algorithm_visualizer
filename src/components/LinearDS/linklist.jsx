@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import axios from "axios";
 import Header from "../header";
 import styles from "../../css/Linklist.module.css";
 import SectionNav from "../sectionNav";
@@ -20,7 +21,7 @@ const LinkedList = () => {
     const [editNode, setEditNode] = useState(null);
     const [editValue, setEditValue] = useState("");
 
-    const addNode = () => {
+    const addNode = async () => {
         if (nodeValue.trim() === "") return;
         const newNode = new Node(nodeValue);
         if (!head) {
@@ -31,6 +32,28 @@ const LinkedList = () => {
                 currentNode = currentNode.next;
             }
             currentNode.next = newNode;
+        }
+        if (localStorage.getItem("userInfo")) {
+            const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+            const config = {
+                headers: {
+                    "Content-type": "application/json",
+                },
+            };
+            const { data } = await axios.post(
+                "http://localhost:5000/user/topic",
+                {
+                    userID: userInfo.userID,
+                    topic: "LinkedList",
+                    completed: true,
+                },
+                config
+            );
+
+            console.log("Submitted:", {
+                data,
+            });
         }
         setNodeValue("");
         displaySnackbar(`Node "${newNode.value}" added`);

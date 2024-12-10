@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import axios from "axios";
 import Header from "../header";
 import styles from "../../css/Array.module.css";
 import SectionNav from "../sectionNav";
@@ -48,7 +49,7 @@ const ArrayComponent = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [inputRows, inputCols, arrayType]);
 
-    const markAsVisited = (rowIndex, colIndex) => {
+    const markAsVisited = async (rowIndex, colIndex) => {
         if (arrayType === "1D") {
             const newArray = array.map((cell, index) => {
                 if (index === colIndex) {
@@ -69,6 +70,24 @@ const ArrayComponent = () => {
                     : row
             );
             setArray(newArray);
+        }
+        if (localStorage.getItem("userInfo")) {
+            const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+            const config = {
+                headers: {
+                    "Content-type": "application/json",
+                },
+            };
+            const { data } = await axios.post(
+                "http://localhost:5000/user/topic",
+                { userID: userInfo.userID, topic: "Array", completed: true },
+                config
+            );
+
+            console.log("Submitted:", {
+                data,
+            });
         }
         setSnackbarMessage(
             `Cell at row ${rowIndex}, column ${colIndex} marked as visited`

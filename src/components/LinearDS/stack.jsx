@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import axios from "axios";
 import Header from "../header";
 import styles from "../../css/Stack.module.css";
 import SectionNav from "../sectionNav";
@@ -9,9 +10,31 @@ const Stack = () => {
     const [inputValue, setInputValue] = useState("");
     const [snackbarMessages, setSnackbarMessages] = useState([]);
 
-    const push = () => {
+    const push = async () => {
         if (inputValue !== "") {
             setStack((prevStack) => [...prevStack, inputValue]);
+            if (localStorage.getItem("userInfo")) {
+                const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+                const config = {
+                    headers: {
+                        "Content-type": "application/json",
+                    },
+                };
+                const { data } = await axios.post(
+                    "http://localhost:5000/user/topic",
+                    {
+                        userID: userInfo.userID,
+                        topic: "Stack",
+                        completed: true,
+                    },
+                    config
+                );
+
+                console.log("Submitted:", {
+                    data,
+                });
+            }
             setInputValue("");
             setSnackbarMessages((prevMessages) => [
                 ...prevMessages,

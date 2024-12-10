@@ -3,6 +3,7 @@ import styles from "../css/Home.module.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "./header";
+import Ball from "./ball";
 
 const Home = () => {
     let [searching, setSearching] = useState("");

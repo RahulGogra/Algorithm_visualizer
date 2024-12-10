@@ -1,6 +1,6 @@
-import React from "react";
 import Header from "../header";
 import { useState, useCallback, useEffect } from "react";
+import axios from "axios";
 import SectionNav from "../sectionNav";
 import styles from "../../css/binarySearch.module.css"; // Import CSS for styling
 
@@ -109,6 +109,28 @@ const BinarySearch = () => {
             sortedArray.length - 1,
             val
         );
+        if (localStorage.getItem("userInfo")) {
+            const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+            const config = {
+                headers: {
+                    "Content-type": "application/json",
+                },
+            };
+            const { data } = await axios.post(
+                "http://localhost:5000/user/topic",
+                {
+                    userID: userInfo.userID,
+                    topic: "binarySearch",
+                    completed: true,
+                },
+                config
+            );
+
+            console.log("Submitted:", {
+                data,
+            });
+        }
         setSwappingIndex(result);
         setIsSearching(false);
     };

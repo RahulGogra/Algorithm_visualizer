@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
@@ -9,23 +10,9 @@ require("colors");
 dotenv.config();
 const app = express();
 
-const allowedOrigins = [
-    "http://localhost:5173", // Frontend origin 1
-    "http://localhost:3000", // Frontend origin 2 (if you have another local instance)
-    "https://algorithm-visualizer-api.vercel.app", // Production frontend
-    // Add other origins as needed
-];
-
 app.use(
     cors({
-        origin: (origin, callback) => {
-            // Allow requests with no origin (like from Postman or curl)
-            if (!origin || allowedOrigins.includes(origin)) {
-                callback(null, true); // Allow the request
-            } else {
-                callback(new Error("Not allowed by CORS")); // Reject the request
-            }
-        },
+        origin: ["*", "http://localhost:5173"],
         credentials: true, // Allow credentials (cookies, sessions, etc.)
     })
 );
@@ -45,11 +32,12 @@ app.post("/user/login", async (req, res) => {
                 .json({ message: "Invalid email or password" });
         }
 
+        console.log(user.email);
         res.status(200).json({
             message: "Login successful",
+            userID: user._id,
             user: user.username,
             email: user.email,
-            userID: user.userID,
         });
     } catch (error) {
         console.error(error);
@@ -156,13 +144,14 @@ app.get("/user/progress", async (req, res) => {
 // Logout route
 app.post("/user/logout", (req, res) => {
     // Destroy the session
-    req.session.destroy((err) => {
-        if (err) {
-            return res.status(500).json({ message: "Logout failed" });
-        }
+    // req.session.destroy((err) => {
+    //     if (err) {
+    //         return res.status(500).json({ message: "Logout failed" });
+    //     }
 
-        res.status(200).json({ message: "Logout successful" });
-    });
+    //     res.status(200).json({ message: "Logout successful" });
+    // });
+    res.status(200).json({ message: "Logout successful" });
 });
 
 // Start the server

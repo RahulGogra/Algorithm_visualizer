@@ -42,6 +42,28 @@ const BubbleSort = () => {
             await new Promise((resolve) => setTimeout(resolve, 500)); // Add an interval after one round is complete
         }
         setCurrentStep("Sorting complete!");
+        if (localStorage.getItem("userInfo")) {
+            const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+            const config = {
+                headers: {
+                    "Content-type": "application/json",
+                },
+            };
+            const { data } = await axios.post(
+                "http://localhost:5000/user/topic",
+                {
+                    userID: userInfo.userID,
+                    topic: "BubbleSort",
+                    completed: true,
+                },
+                config
+            );
+
+            console.log("Submitted:", {
+                data,
+            });
+        }
         await new Promise((resolve) => setTimeout(resolve, 2000));
         setIsSorting(false);
         setSwappingIndices([-1, -1]); // Reset swapping indices after sorting is complete

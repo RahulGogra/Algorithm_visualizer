@@ -1,6 +1,6 @@
-import React from "react";
 import Header from "../header";
 import { useState, useEffect, useCallback } from "react";
+import axios from "axios";
 import SectionNav from "../sectionNav";
 import styles from "../../css/linearSearch.module.css"; // Import CSS for styling
 
@@ -67,6 +67,28 @@ const LinearSearch = () => {
         setIsSearching(true);
         const val = parseInt(input, 10);
         const result = await linearSearch(array, 0, array.length - 1, val);
+        if (localStorage.getItem("userInfo")) {
+            const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+            const config = {
+                headers: {
+                    "Content-type": "application/json",
+                },
+            };
+            const { data } = await axios.post(
+                "http://localhost:5000/user/topic",
+                {
+                    userID: userInfo.userID,
+                    topic: "LinearSearch",
+                    completed: true,
+                },
+                config
+            );
+
+            console.log("Submitted:", {
+                data,
+            });
+        }
         setSwappingIndex(result);
         setIsSearching(false);
     };

@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import axios from "axios";
 import Header from "../header";
 import styles from "../../css/Queue.module.css";
 import SectionNav from "../sectionNav";
@@ -9,9 +10,31 @@ const Queue = () => {
     const [inputValue, setInputValue] = useState("");
     const [snackbarMessages, setSnackbarMessages] = useState([]);
 
-    const enqueue = () => {
+    const enqueue = async () => {
         if (inputValue !== "") {
             setQueue((prevQueue) => [...prevQueue, inputValue]);
+            if (localStorage.getItem("userInfo")) {
+                const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+                const config = {
+                    headers: {
+                        "Content-type": "application/json",
+                    },
+                };
+                const { data } = await axios.post(
+                    "http://localhost:5000/user/topic",
+                    {
+                        userID: userInfo.userID,
+                        topic: "Queue",
+                        completed: true,
+                    },
+                    config
+                );
+
+                console.log("Submitted:", {
+                    data,
+                });
+            }
             setInputValue("");
             setSnackbarMessages((prevMessages) => [
                 ...prevMessages,

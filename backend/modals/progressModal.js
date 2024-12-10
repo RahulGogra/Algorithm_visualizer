@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const mongoose = require("mongoose");
 
 const topicSchema = new mongoose.Schema({

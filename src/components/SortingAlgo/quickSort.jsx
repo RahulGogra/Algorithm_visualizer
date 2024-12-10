@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import axios from "axios";
 import "../../css/bubbleSort.css";
 import Header from "../header";
 import SectionNav from "../sectionNav";
@@ -59,6 +60,28 @@ const QuickSort = () => {
         let arrCopy = [...array];
         await quickSort(arrCopy, 0, arrCopy.length - 1);
         setCurrentStep("Sorting complete!");
+        if (localStorage.getItem("userInfo")) {
+            const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+
+            const config = {
+                headers: {
+                    "Content-type": "application/json",
+                },
+            };
+            const { data } = await axios.post(
+                "http://localhost:5000/user/topic",
+                {
+                    userID: userInfo.userID,
+                    topic: "QuickSort",
+                    completed: true,
+                },
+                config
+            );
+
+            console.log("Submitted:", {
+                data,
+            });
+        }
         await new Promise((resolve) => setTimeout(resolve, 2000));
         setIsSorting(false);
         setSwappingIndices([-1, -1]);

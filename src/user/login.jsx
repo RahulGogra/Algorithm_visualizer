@@ -22,11 +22,10 @@ const Login = () => {
             withCredentials: true,
         };
         const { data } = await axios.post(
-            "https://algorithm-visualizer-api.vercel.app/user/login",
+            "http://localhost:5000/user/login",
             { email, password },
             config
         );
-
         localStorage.setItem("userInfo", JSON.stringify(data));
 
         console.log("Submitted:", {
