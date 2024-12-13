@@ -76,36 +76,29 @@ app.post("/user/topic", async (req, res) => {
     try {
         const { userID, topic, completed } = req.body;
 
-        // Debug: Log incoming request data
-        console.log("Request body:", { userID, topic, completed });
-
-        if (!userID || !topic || typeof completed === "undefined") {
-            return res.status(400).json({ message: "Invalid input data" });
+        if (!userID) {
+            return res.status(401).json({ message: "Not authenticated" });
         }
 
-        // Check if progress already exists for the user
         let userProgress = await Progress.findOne({ userID });
 
         if (userProgress) {
-            // Find the existing topic
             const existingTopic = userProgress.topics.find(
                 (t) => t.topic === topic
             );
 
             if (existingTopic) {
-                existingTopic.completed = completed; // Update completion status
+                existingTopic.completed = completed;
             } else {
-                userProgress.topics.push({ topic, completed }); // Add new topic
+                userProgress.topics.push({ topic, completed });
             }
 
-            // Save updated progress
             await userProgress.save();
             res.status(200).json({
                 message: "Progress updated successfully",
                 progress: userProgress,
             });
         } else {
-            // Create new progress document
             const newProgress = new Progress({
                 userID,
                 topics: [{ topic, completed }],
@@ -118,8 +111,8 @@ app.post("/user/topic", async (req, res) => {
             });
         }
     } catch (error) {
-        console.error("Server error:", error.message);
-        res.status(500).json({ message: "Server error", error: error.message });
+        console.error(error);
+        res.status(500).json({ message: "Server error" });
     }
 });
 
