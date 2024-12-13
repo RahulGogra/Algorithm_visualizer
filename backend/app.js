@@ -12,7 +12,11 @@ const app = express();
 
 app.use(
     cors({
-        origin: ["*", "http://localhost:5173"],
+        origin: [
+            "*",
+            "http://localhost:5173",
+            "https://algorithm-visualizer-api.onrender.com",
+        ],
         credentials: true, // Allow credentials (cookies, sessions, etc.)
     })
 );
