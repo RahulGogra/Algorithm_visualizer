@@ -10,18 +10,24 @@ require("colors");
 dotenv.config();
 const app = express();
 
+// CORS configuration
 app.use(
     cors({
         origin: [
-            "*",
-            "http://localhost:5173",
+            "http://localhost:5173", // Your React app's URL
             "https://algorithm-visualizer-api.onrender.com",
         ],
         credentials: true, // Allow credentials (cookies, sessions, etc.)
     })
 );
+
+// Handle preflight requests for all routes
+app.options("*", cors());
+
+// Middleware
 app.use(express.json());
 
+// Connect to database
 connectDB();
 
 // User login route
@@ -65,47 +71,46 @@ app.post("/user/register", async (req, res) => {
     }
 });
 
-// Route to submit progress (BFS graph traversal example)
+// Route to submit progress
 app.post("/user/topic", async (req, res) => {
     try {
         const { userID, topic, completed } = req.body;
 
-        // Ensure the user is logged in
-        if (!userID) {
-            return res.status(401).json({ message: "Not authenticated" });
+        // Debug: Log incoming request data
+        console.log("Request body:", { userID, topic, completed });
+
+        if (!userID || !topic || typeof completed === "undefined") {
+            return res.status(400).json({ message: "Invalid input data" });
         }
 
-        // Check if the user already has progress saved
+        // Check if progress already exists for the user
         let userProgress = await Progress.findOne({ userID });
 
         if (userProgress) {
-            // Check if the topic already exists in the user's topics
+            // Find the existing topic
             const existingTopic = userProgress.topics.find(
                 (t) => t.topic === topic
             );
 
             if (existingTopic) {
-                // If the topic exists, update the completion status
-                existingTopic.completed = completed;
+                existingTopic.completed = completed; // Update completion status
             } else {
-                // If the topic doesn't exist, add it to the topics array
-                userProgress.topics.push({ topic, completed });
+                userProgress.topics.push({ topic, completed }); // Add new topic
             }
 
-            // Save the updated progress
+            // Save updated progress
             await userProgress.save();
             res.status(200).json({
                 message: "Progress updated successfully",
                 progress: userProgress,
             });
         } else {
-            // If no progress exists for the user, create a new entry
+            // Create new progress document
             const newProgress = new Progress({
                 userID,
                 topics: [{ topic, completed }],
             });
 
-            // Save the new progress
             await newProgress.save();
             res.status(201).json({
                 message: "Progress created successfully",
@@ -113,8 +118,8 @@ app.post("/user/topic", async (req, res) => {
             });
         }
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Server error" });
+        console.error("Server error:", error.message);
+        res.status(500).json({ message: "Server error", error: error.message });
     }
 });
 
@@ -123,22 +128,18 @@ app.get("/user/progress", async (req, res) => {
     try {
         const userID = req.query.userID;
 
-        // Ensure the user is logged in
         if (!userID) {
             return res.status(401).json({ message: "Not authenticated" });
         }
 
-        // Fetch the user's progress from the database
-        const userProgress = await Progress.findOne({ userID: userID });
+        const userProgress = await Progress.findOne({ userID });
 
-        // If no progress data found for the user
         if (!userProgress) {
             return res
                 .status(404)
                 .json({ message: "Progress not found for this user" });
         }
 
-        // Send the user's topics array
         res.json(userProgress.topics);
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -147,14 +148,6 @@ app.get("/user/progress", async (req, res) => {
 
 // Logout route
 app.post("/user/logout", (req, res) => {
-    // Destroy the session
-    // req.session.destroy((err) => {
-    //     if (err) {
-    //         return res.status(500).json({ message: "Logout failed" });
-    //     }
-
-    //     res.status(200).json({ message: "Logout successful" });
-    // });
     res.status(200).json({ message: "Logout successful" });
 });
 
