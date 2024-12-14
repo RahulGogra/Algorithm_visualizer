@@ -31,7 +31,7 @@ const Profile = () => {
                 },
                 withCredentials: true, // Important to include cookies with the request
             });
-            setProgress(response.data);
+            setProgress(response.data.topics || []);
             // Handle the response
             console.log(response.data); // This will give you the user's progress data
         } catch (error) {
@@ -88,7 +88,6 @@ const Profile = () => {
                                     {progress.map((item) => (
                                         <li key={item._id}>
                                             <h3>{item.topic}</h3>
-                                            <p>{item.userID}</p>
                                         </li>
                                     ))}
                                 </ul>
