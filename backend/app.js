@@ -18,6 +18,7 @@ app.use(
             "*",
             "http://localhost:5173", // Your React app's URL
             "https://algorithm-visualizer-api.onrender.com",
+            "https://algorithm-visualizer-umber.vercel.app/",
         ],
         credentials: true, // Allow credentials (cookies, sessions, etc.)
     })
