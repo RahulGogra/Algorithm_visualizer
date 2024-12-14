@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 const connectDB = require("./db/connect");
 const Users = require("./modals/userModal");
 const Topic = require("./modals/topicModal");
-const Progress = require("./modals/progressModal");
+const Progress = require("./modals/progressModal"); // Assuming this is still relevant
 require("colors");
 
 dotenv.config();
@@ -15,10 +15,9 @@ const app = express();
 app.use(
     cors({
         origin: [
-            "*",
-            "http://localhost:5173", // Your React app's URL
-            "https://algorithm-visualizer-api.onrender.com",
-            "https://algorithm-visualizer-umber.vercel.app/",
+            "http://localhost:5173", // Your React app's URL in development
+            "https://algorithm-visualizer-api.onrender.com", // If your backend is deployed here
+            "https://algorithm-visualizer-umber.vercel.app", // Frontend URL
         ],
         credentials: true, // Allow credentials (cookies, sessions, etc.)
     })
@@ -45,7 +44,6 @@ app.post("/user/login", async (req, res) => {
                 .json({ message: "Invalid email or password" });
         }
 
-        console.log(user.email);
         res.status(200).json({
             message: "Login successful",
             userID: user._id,
@@ -74,7 +72,7 @@ app.post("/user/register", async (req, res) => {
     }
 });
 
-// Route to submit progress
+// Route to submit progress (Topic creation or update)
 app.post("/user/topic", async (req, res) => {
     try {
         const { userID, topic, completed } = req.body;
@@ -112,7 +110,7 @@ app.post("/user/topic", async (req, res) => {
     }
 });
 
-// Route to get user's progress
+// Route to get user's progress (all topics)
 app.get("/user/progress", async (req, res) => {
     try {
         const { userID } = req.query;
@@ -137,7 +135,7 @@ app.get("/user/progress", async (req, res) => {
     }
 });
 
-// Logout route
+// Logout route (just clears the session/cookie on frontend)
 app.post("/user/logout", (req, res) => {
     res.status(200).json({ message: "Logout successful" });
 });
