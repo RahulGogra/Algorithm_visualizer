@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import axios from "axios";
 import "../../css/bubbleSort.css";
 import Header from "../header";
 import SectionNav from "../sectionNav";
@@ -51,7 +52,7 @@ const BubbleSort = () => {
                 },
             };
             const { data } = await axios.post(
-                "http://localhost:5000/user/topic",
+                import.meta.env.VITE_topic,
                 {
                     userID: userInfo.userID,
                     topic: "BubbleSort",

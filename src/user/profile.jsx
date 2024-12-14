@@ -25,15 +25,12 @@ const Profile = () => {
     const fetchProgress = async () => {
         try {
             // Make a GET request to /user/progress
-            const response = await axios.get(
-                "http://localhost:5000/user/progress",
-                {
-                    params: {
-                        userID: user.userID,
-                    },
-                    withCredentials: true, // Important to include cookies with the request
-                }
-            );
+            const response = await axios.get(import.meta.env.VITE_progress, {
+                params: {
+                    userID: user.userID,
+                },
+                withCredentials: true, // Important to include cookies with the request
+            });
             setProgress(response.data);
             // Handle the response
             console.log(response.data); // This will give you the user's progress data
@@ -53,10 +50,7 @@ const Profile = () => {
             },
             withCredentials: true,
         };
-        const { data } = await axios.post(
-            "http://localhost:5000/user/logout",
-            config
-        );
+        const { data } = await axios.post(import.meta.env.VITE_logout, config);
         console.log(data);
         navigate("/"); // Redirect to the login or home page
     };

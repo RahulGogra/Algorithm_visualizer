@@ -57,7 +57,7 @@ const SelectionSort = () => {
                 },
             };
             const { data } = await axios.post(
-                "http://localhost:5000/user/topic",
+                import.meta.env.VITE_topic,
                 {
                     userID: userInfo.userID,
                     topic: "SelectionSort",

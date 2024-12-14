@@ -4,6 +4,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const connectDB = require("./db/connect");
 const Users = require("./modals/userModal");
+const Topic = require("./modals/topicModal");
 const Progress = require("./modals/progressModal");
 require("colors");
 
@@ -14,6 +15,7 @@ const app = express();
 app.use(
     cors({
         origin: [
+            "*",
             "http://localhost:5173", // Your React app's URL
             "https://algorithm-visualizer-api.onrender.com",
         ],
@@ -76,40 +78,33 @@ app.post("/user/topic", async (req, res) => {
     try {
         const { userID, topic, completed } = req.body;
 
-        if (!userID) {
-            return res.status(401).json({ message: "Not authenticated" });
+        if (!userID || !topic) {
+            return res
+                .status(400)
+                .json({ message: "User ID and topic are required" });
         }
 
-        let userProgress = await Progress.findOne({ userID });
+        // Check if the topic already exists for the user
+        let existingTopic = await Topic.findOne({ userID, topic });
 
-        if (userProgress) {
-            const existingTopic = userProgress.topics.find(
-                (t) => t.topic === topic
-            );
-
-            if (existingTopic) {
-                existingTopic.completed = completed;
-            } else {
-                userProgress.topics.push({ topic, completed });
-            }
-
-            await userProgress.save();
-            res.status(200).json({
-                message: "Progress updated successfully",
-                progress: userProgress,
-            });
-        } else {
-            const newProgress = new Progress({
-                userID,
-                topics: [{ topic, completed }],
-            });
-
-            await newProgress.save();
-            res.status(201).json({
-                message: "Progress created successfully",
-                progress: newProgress,
+        if (existingTopic) {
+            // Update completion status
+            existingTopic.completed = completed;
+            await existingTopic.save();
+            return res.status(200).json({
+                message: "Topic updated successfully",
+                topic: existingTopic,
             });
         }
+
+        // Create a new topic
+        const newTopic = new Topic({ userID, topic, completed });
+        await newTopic.save();
+
+        res.status(201).json({
+            message: "Topic created successfully",
+            topic: newTopic,
+        });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Server error" });
@@ -119,23 +114,25 @@ app.post("/user/topic", async (req, res) => {
 // Route to get user's progress
 app.get("/user/progress", async (req, res) => {
     try {
-        const userID = req.query.userID;
+        const { userID } = req.query;
 
         if (!userID) {
-            return res.status(401).json({ message: "Not authenticated" });
+            return res.status(400).json({ message: "User ID is required" });
         }
 
-        const userProgress = await Progress.findOne({ userID });
+        // Find all topics for the user
+        const topics = await Topic.find({ userID });
 
-        if (!userProgress) {
+        if (!topics.length) {
             return res
                 .status(404)
-                .json({ message: "Progress not found for this user" });
+                .json({ message: "No progress found for this user" });
         }
 
-        res.json(userProgress.topics);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
+        res.status(200).json({ topics });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Server error" });
     }
 });
 
